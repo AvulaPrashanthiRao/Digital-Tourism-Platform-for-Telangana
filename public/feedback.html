@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="form-container">
+
+    <h1>Tourist Feedback</h1>
+
+    <form action="/feedback" method="POST">
+
+        <input type="text"
+               name="name"
+               placeholder="Enter Your Name"
+               required>
+
+        <select name="place" required>
+            <option value="">Select Tourist Place</option>
+            <option>Charminar</option>
+            <option>Golconda Fort</option>
+            <option>Ramappa Temple</option>
+            <option>Bhadrachalam Temple</option>
+            <option>Bogatha Waterfall</option>
+        </select>
+
+        <input type="number"
+               name="rating"
+               min="1"
+               max="5"
+               placeholder="Rating (1-5)"
+               required>
+
+        <textarea
+            name="message"
+            placeholder="Enter Your Feedback"
+            rows="5"
+            required></textarea>
+
+        <button type="submit">
+            Submit Feedback
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Your Trip</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="form-container">
+
+    <h1>Tour Booking</h1>
+
+    <form action="/booking" method="POST">
+
+        <input type="text"
+               name="name"
+               placeholder="Enter Your Name"
+               required>
+
+        <input type="email"
+               name="email"
+               placeholder="Enter Your Email"
+               required>
+
+        <input type="text"
+               name="phone"
+               placeholder="Enter Phone Number"
+               required>
+
+        <select name="place" id="place"required>
+            <option value="">Select Tourist Place</option>
+            <option>Charminar</option>
+            <option>Golconda Fort</option>
+            <option>Ramappa Temple</option>
+            <option>Bhadrachalam Temple</option>
+            <option>Bogatha Waterfall</option>
+        </select>
+        <select name="package" id="package"required>
+    <option value="">Select Package</option>
+    <option>Basic Package</option>
+    <option>Premium Package</option>
+</select>
+
+        <input type="date"
+               name="visitDate"
+               required>
+
+        <input type="number"
+               name="people"
+               id="people"
+               placeholder="Number of Visitors"
+               required>
+               <p id="totalCost">Total Cost: ₹0</p>
+
+        <button type="submit">
+            Book Now
+        </button>
+
+    </form>
+
+</div>
+<script>
+function calculateCost() {
+
+    const place = document.getElementById("place").value;
+    const packageType = document.getElementById("package").value;
+    const people = document.getElementById("people").value;
+
+    let price = 0;
+
+    if (place === "Charminar") {
+        price = packageType === "Basic Package" ? 500 : 1200;
+    }
+    else if (place === "Golconda Fort") {
+        price = packageType === "Basic Package" ? 700 : 1500;
+    }
+    else if (place === "Ramappa Temple") {
+        price = packageType === "Basic Package" ? 600 : 1300;
+    }
+    else if (place === "Bhadrachalam Temple") {
+        price = packageType === "Basic Package" ? 800 : 1600;
+    }
+    else if (place === "Bogatha Waterfall") {
+        price = packageType === "Basic Package" ? 1000 : 2000;
+    }
+
+    const total = price * (people || 0);
+
+    document.getElementById("totalCost").innerText =
+        "Total Cost: ₹" + total;
+}
+
+document.getElementById("place").addEventListener("change", calculateCost);
+document.getElementById("package").addEventListener("change", calculateCost);
+document.getElementById("people").addEventListener("input", calculateCost);
+</script>
+</body>
+</html>

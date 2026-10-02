@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telangana Tourism</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Explore Telangana</h1>
+    <p>Discover the best tourist attractions in Telangana</p>
+</header>
+
+<div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/register">Register</a>
+    <a href="/login">Login</a>
+    <a href="/booking">Book Your Trip</a>
+    <a href="/feedback">Feedback</a>
+
+    <div class="user-section">
+    <span id="userInfo"></span>
+    <button
+    onclick="logout()"
+    class="logout-btn">Logout</button>
+</div>
+</div>
+<input type="text" id="searchBox" placeholder="Search tourist places...">
+
+    <div class="container">
+
+        <div class="card" data-name="Charminar">
+            <img src="/images/charminar.webp" alt="Charminar">
+            <h2>Charminar</h2>
+            <p>📍 Hyderabad</p>
+            <p>Historic monument and tourist attraction.</p>
+            <p>⭐ 4.5</p>
+            <button onclick="showDetails(
+'Charminar',
+'Historic monument and tourist attraction.Built in 1591 by Muhammad Quli Qutb Shah.Famous landmark of Hyderabad.Nearby: Laad Bazaar',
+'images/charminar.webp',
+'Hyderabad',
+'4.5',
+'Basic Package: ₹500/person | Premium Package: ₹1200/person',
+'https://maps.google.com/?q=Charminar,Hyderabad',
+'Temperature: 32°C | Clear Sky'
+)">
+View Details
+</button>
+        </div>
+
+        <div class="card" data-name="Golconda Fort">
+            <img src="/images/golconda.jpg" alt="Golconda Fort">
+            <h2>Golconda Fort</h2>
+            <p>📍 Hyderabad</p>
+            <p>Famous fort known for acoustic architecture.</p>
+            <p>⭐ 4.7</p>
+            <button onclick="showDetails(
+'Golconda Fort',
+'Famous fort known for acoustic architecture.Historic fort of the Qutb Shahi dynasty Known for its acoustic system Light & Sound Show available',
+'images/golconda.jpg',
+'Hyderabad',
+'4.7',
+'Basic Package: ₹700/person | Premium Package: ₹1500/person',
+'https://maps.google.com/?q=Golconda+Fort,Hyderabad',
+'Temperature: 33°C | Clear with Periodic clouds'
+)">
+View Details
+</button>
+        </div>
+
+        <div class="card" data-name="Ramappa Temple">
+            <img src="/images/ramappa.jpg" alt="Ramappa Temple">
+            <h2>Ramappa Temple</h2>
+            <p>📍 Palampet</p>
+            <p>UNESCO World Heritage Site.</p>
+            <p>⭐ 4.8</p>
+            <button onclick="showDetails(
+'Ramappa Temple',
+'UNESCO World Heritage Site.Built in the 13th century Famous for intricate carvings Bhadrachalam Temple',
+'images/ramappa.jpg',
+'Palampet',
+'4.8',
+'Basic Package: ₹800/person | Premium Package: ₹1800/person',
+'https://maps.google.com/?q=Ramappa+Temple,Palampet',
+'Temperature: 34°C | Clear Sky'
+)">
+View Details
+</button>
+        </div>
+
+        <div class="card" data-name="Bhadrachalam">
+            <img src="/images/bhadrachalam.webp" alt="Bhadrachalam Temple">
+            <h2>Bhadrachalam Temple</h2>
+            <p>📍 Bhadrachalam</p>
+            <p>Famous temple dedicated to Lord Rama.</p>
+            <p>⭐ 4.8</p>
+            <button onclick="showDetails(
+'Bhadrachalam Temple',
+'Famous temple dedicated to Lord Rama.Located on the banks of the Godavari River Major pilgrimage center',
+'images/bhadrachalam.webp',
+'Bhadrachalam',
+'4.8',
+'Basic Package: ₹1000/person | Premium Package: ₹2500/person',
+'https://maps.google.com/?q=Bhadrachalam+Temple,Bhadrachalam',
+'Temperature: 32°C | Clear Sky'
+)">
+View Details
+</button>
+        </div>
+
+        <div class="card" data-name="Bogatha Waterfall">
+            <img src="/images/bogatha.jpg" alt="Bogatha Waterfall">
+            <h2>Bogatha Waterfall</h2>
+            <p>📍 Wazeedu</p>
+            <p>Known as the Niagara of Telangana.</p>
+            <p>⭐ 4.6</p>
+            <button onclick="showDetails(
+'Bogatha Waterfall',
+'Known as the Niagara of Telangana.Second largest waterfall in Telangana Best visited during monsoon Surrounded by forest scenery',
+'images/bogatha.jpg',
+'Wazeedu',
+'4.6',
+'Basic Package: ₹900/person | Premium Package: ₹1600/person',
+'https://maps.google.com/?q=Bogatha+Waterfall,Wazeedu',
+'Temperature: 32°C | Clear Sky'
+)">
+View Details
+</button>
+        </div>
+
+    </div>
+    <footer>
+    <p>© 2026 Telangana Tourism Platform</p>
+</footer>
+<script>
+const searchBox = document.getElementById("searchBox");
+
+searchBox.addEventListener("keyup", () => {
+    const searchText = searchBox.value.toLowerCase();
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        const placeName = card.dataset.name.toLowerCase();
+
+        if (placeName.includes(searchText)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
+</script>
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+
+        <img id="popupImage" width="300">
+
+        <h2 id="popupTitle"></h2>
+
+        <p id="popupLocation"></p>
+        <p id="popupWeather"></p>
+        <p id="popupDescription"></p>
+
+        <p id="popupRating"></p>
+        <p id="popupPackage"></p>
+        <a id="mapLink" href="#" target="_blank">
+    <button>📍 View on Google Maps</button>
+</a>
+    </div>
+</div>
+<script>
+function showDetails(name, description, image, location, rating, PackageInfo, mapUrl, weather){
+
+    document.getElementById("popupTitle").innerText = name;
+    document.getElementById("popupDescription").innerText = description;
+    document.getElementById("popupImage").src = image;
+    document.getElementById("popupLocation").innerText = "📍 " + location;
+    document.getElementById("popupWeather").innerText = "🌦 " + weather;
+    document.getElementById("popupRating").innerText = "⭐ " + rating;
+    document.getElementById("popupPackage").innerText = PackageInfo;
+    document.getElementById("mapLink").href = mapUrl;
+
+    document.getElementById("popup").style.display = "flex";
+
+    // Prevent background scrolling
+    document.body.style.overflow = "hidden";
+}
+
+function closePopup(){
+
+    document.getElementById("popup").style.display = "none";
+
+    // Enable scrolling again
+    document.body.style.overflow = "auto";
+}
+</script>
+<script>
+    const user = localStorage.getItem("loggedInUser");
+
+    if(user){
+        document.getElementById("userInfo").innerHTML =
+        "👤 Logged in as: " + user;
+    }
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "/";
+}
+    </script>
+</script>
+</body>
+</html>
